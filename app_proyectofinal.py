@@ -30,7 +30,7 @@ def cargar_datos(path1, path2) -> pd.DataFrame:
         df = df.drop(columns=['Unnamed: 0'])
     
     #distinguimos tipos
-    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    #df['date'] = pd.to_datetime(df['date'], errors='coerce')
 
     return df
 
