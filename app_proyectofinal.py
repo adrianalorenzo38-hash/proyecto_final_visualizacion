@@ -25,9 +25,12 @@ def cargar_datos(path1, path2) -> pd.DataFrame:
     #concatenamos ambos (ya que son 2 partes del mismo df)
     df = pd.concat([df1,df2], ignore_index=True)
 
+    df.columns = df.columns.str.strip()
+
+
     #hacemos una limpieza básica primero
-    if 'Unnamed: 0' in df.columns:
-        df = df.drop(columns=['Unnamed: 0'])
+    #if 'Unnamed: 0' in df.columns:
+        #df = df.drop(columns=['Unnamed: 0'])
     
     #distinguimos tipos
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
