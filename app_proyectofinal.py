@@ -16,26 +16,32 @@ st.caption("Proyecto final visualización de datos: Adriana Lorenzo")
 URL_PARTE_1 = "https://github.com/adrianalorenzo38-hash/proyecto_final_visualizacion/releases/download/v1/parte_1.csv"
 URL_PARTE_2 = "https://github.com/adrianalorenzo38-hash/proyecto_final_visualizacion/releases/download/v1/parte_2.csv"
 
-#cargamos los datos
-@st.cache_data(show_spinner='Cargamos los datos: ')
-def cargar_datos(path1, path2) -> pd.DataFrame:
-    df1 = pd.read_csv(path1, low_memory=False)
-    df2 = pd.read_csv(path2, low_memory=False)
+#cargamos los datos, cogemos solo las columnas necesarias
+@st.cache_data(show_spinner="Cargando datos:")
+def cargar_datos(url1: str, url2: str) -> pd.DataFrame:
+    usecols = [
+        "date","store_nbr","family","sales","onpromotion",
+        "state","transactions","year","month","week","day_of_week"
+    ]
+    dtypes = {
+        "store_nbr": "int16",
+        "family": "category",
+        "sales": "float32",
+        "onpromotion": "int16",
+        "state": "category",
+        "transactions": "float32",
+        "year": "int16",
+        "month": "int8",
+        "week": "int8",
+        "day_of_week": "category",
+    }
 
-    #concatenamos ambos (ya que son 2 partes del mismo df)
-    df = pd.concat([df1,df2], ignore_index=True)
-
-    df.columns = df.columns.str.strip()
-
-
-    #hacemos una limpieza básica primero
-    #if 'Unnamed: 0' in df.columns:
-        #df = df.drop(columns=['Unnamed: 0'])
-    
-    #distinguimos tipos
-    df['date'] = pd.to_datetime(df['date'], errors='coerce')
-
+    df1 = pd.read_csv(url1, usecols=usecols, dtype=dtypes)
+    df2 = pd.read_csv(url2, usecols=usecols, dtype=dtypes)
+    df = pd.concat([df1, df2], ignore_index=True)
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
     return df
+
 
 df = cargar_datos(URL_PARTE_1, URL_PARTE_2)
 
