@@ -12,9 +12,13 @@ import streamlit as st
 st.title("Dashboard de Ventas (Cierre de Año)")
 st.caption("Proyecto final visualización de datos: Adriana Lorenzo")
 
+#definimos los enlaces a google drive para los datos ya que son muy pesados
+URL_PARTE_1 = "https://drive.google.com/uc?export=download&id=1v3g0Oe_UnL9Gs493VHWrmt9R8LZNO9Nb"
+URL_PARTE_2 = "https://drive.google.com/uc?export=download&id=1Gzs-4gn4DmeM8Da-2fuW_gP4TpEcjU-3"
+
 #cargamos los datos
 @st.cache_data(show_spinner='Cargamos los datos: ')
-def cargar_datos(path1: str, path2: str) -> pd.DataFrame:
+def cargar_datos(path1, path2) -> pd.DataFrame:
     df1 = pd.read_csv(path1, low_memory=False)
     df2 = pd.read_csv(path2, low_memory=False)
 
@@ -30,7 +34,7 @@ def cargar_datos(path1: str, path2: str) -> pd.DataFrame:
 
     return df
 
-df = cargar_datos('parte_1/parte_1.csv', 'parte_2/parte_2.csv')
+df = cargar_datos(URL_PARTE_1, URL_PARTE_2)
 
 
 #creamos las pestañas
