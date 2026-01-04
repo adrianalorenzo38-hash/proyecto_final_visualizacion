@@ -12,9 +12,9 @@ import streamlit as st
 st.title("Dashboard de Ventas (Cierre de Año)")
 st.caption("Proyecto final visualización de datos: Adriana Lorenzo")
 
-#definimos los enlaces a google drive para los datos ya que son muy pesados
-URL_PARTE_1 = "https://drive.google.com/uc?export=download&id=1v3g0Oe_UnL9Gs493VHWrmt9R8LZNO9Nb"
-URL_PARTE_2 = "https://drive.google.com/uc?export=download&id=1Gzs-4gn4DmeM8Da-2fuW_gP4TpEcjU-3"
+#definimos los enlaces a github releases para los datos ya que son muy pesados
+URL_PARTE_1 = "https://github.com/adrianalorenzo38-hash/proyecto_final_visualizacion/releases/download/v1/parte_1.csv"
+URL_PARTE_2 = "https://github.com/adrianalorenzo38-hash/proyecto_final_visualizacion/releases/download/v1/parte_2.csv"
 
 #cargamos los datos
 @st.cache_data(show_spinner='Cargamos los datos: ')
@@ -30,7 +30,7 @@ def cargar_datos(path1, path2) -> pd.DataFrame:
         df = df.drop(columns=['Unnamed: 0'])
     
     #distinguimos tipos
-    #df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
 
     return df
 
