@@ -106,7 +106,7 @@ with tab1:
     top10_promo_tiendas =  promo_df.groupby('store_nbr')['sales'].sum().sort_values(ascending=False).head(10)
 
     #lo mostramos en una tabla
-    st.dataframe(top10_promo_tiendas.reset_index(name='ventas_promo'), use_container_width=True)       
+    st.dataframe(top10_promo_tiendas.reset_index(name='ventas_promo'), width='stretch')       
     #lo mostramos en gráfica
     st.bar_chart(top10_promo_tiendas)
     
@@ -259,7 +259,7 @@ with tab3:
 
     st.bar_chart(top10_tiendas)
 
-    st.dataframe(top10_tiendas.reset_index(name='ventas'), use_container_width=True)
+    st.dataframe(top10_tiendas.reset_index(name='ventas'),  width='stretch')
 
     #c) Producto más vendido en la tienda
     st.markdown("### c) Producto más vendido en la tienda")
@@ -352,4 +352,4 @@ with tab4:
     st.caption("medias de ventas: filas=mes, columnas=día. Valores más altos indican mayor actividad.")
 
     #estilado tipo heatmap  
-    st.dataframe(pivot.style.background_gradient(axis=None), use_container_width=True)
+    st.dataframe(pivot.style.background_gradient(axis=None),  width='stretch')
